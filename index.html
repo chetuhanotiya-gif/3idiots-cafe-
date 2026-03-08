@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>3 Idiots Cafe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#3b2416;
+color:white;
+background-image:url("logo.jpg");
+background-repeat:no-repeat;
+background-position:center;
+background-size:500px;
+background-attachment:fixed;
+}
+
+header{
+background:#2a160d;
+padding:20px;
+text-align:center;
+font-size:28px;
+}
+
+.menu{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:30px;
+}
+
+.item{
+background:#4a2e1f;
+padding:15px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,0.4);
+}
+
+.item img{
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:10px;
+}
+
+button{
+background:#d35400;
+color:white;
+border:none;
+padding:10px 15px;
+margin-top:10px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#e67e22;
+}
+
+.cart{
+background:#2a160d;
+padding:20px;
+margin:20px;
+border-radius:10px;
+}
+
+select{
+padding:8px;
+margin-top:10px;
+}
+
+</style>
+
+<script>
+
+let cart=[];
+
+function addItem(name,price){
+
+cart.push({name,price});
+showCart();
+
+}
+
+function showCart(){
+
+let cartHTML="";
+let total=0;
+
+cart.forEach((item)=>{
+
+cartHTML+=item.name+" - ₹"+item.price+"<br>";
+total+=item.price;
+
+});
+
+document.getElementById("cartItems").innerHTML=cartHTML;
+document.getElementById("total").innerText=total;
+
+}
+
+function sendOrder(){
+
+let table=document.getElementById("table").value;
+
+let order="3 Idiots Cafe Order\n";
+order+="Table Number: "+table+"\n\n";
+
+cart.forEach((item)=>{
+order+=item.name+" ₹"+item.price+"\n";
+});
+
+window.location.href="mailto:chetuhanotiya@gmail.com?subject=Cafe Order&body="+encodeURIComponent(order);
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>3 Idiots Cafe</h1>
+<p>Haldighati Gate Jaipur</p>
+
+</header>
+
+<div class="menu">
+
+<div class="item">
+
+<img src="https://images.unsplash.com/photo-1601924582975-7e3e2d5c9c89">
+
+<h3>Pizza Small</h3>
+<p>₹120</p>
+
+<button onclick="addItem('Pizza Small',120)">Add</button>
+
+</div>
+
+<div class="item">
+
+<img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e">
+
+<h3>Pizza Medium</h3>
+<p>₹150</p>
+
+<button onclick="addItem('Pizza Medium',150)">Add</button>
+
+</div>
+
+<div class="item">
+
+<img src="https://images.unsplash.com/photo-1548365328-5b849d47f2f2">
+
+<h3>Pizza Large</h3>
+<p>₹190</p>
+
+<button onclick="addItem('Pizza Large',190)">Add</button>
+
+</div>
+
+<div class="item">
+
+<img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+
+<h3>Veg Burger</h3>
+<p>₹90</p>
+
+<button onclick="addItem('Veg Burger',90)">Add</button>
+
+</div>
+
+<div class="item">
+
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+
+<h3>Honey Chilli Potato</h3>
+<p>₹130</p>
+
+<button onclick="addItem('Honey Chilli Potato',130)">Add</button>
+
+</div>
+
+<div class="item">
+
+<img src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841">
+
+<h3>Hakka Noodles</h3>
+<p>₹80</p>
+
+<button onclick="addItem('Hakka Noodles',80)">Add</button>
+
+</div>
+
+<div class="item">
+
+<img src="https://images.unsplash.com/photo-1572441713132-51c75654db73">
+
+<h3>Cold Coffee Small</h3>
+<p>₹60</p>
+
+<button onclick="addItem('Cold Coffee Small',60)">Add</button>
+
+</div>
+
+<div class="item">
+
+<img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735">
+
+<h3>Cold Coffee Medium</h3>
+<p>₹80</p>
+
+<button onclick="addItem('Cold Coffee Medium',80)">Add</button>
+
+</div>
+
+<div class="item">
+
+<img src="https://images.unsplash.com/photo-1511920170033-f8396924c348">
+
+<h3>Cold Coffee Large</h3>
+<p>₹110</p>
+
+<button onclick="addItem('Cold Coffee Large',110)">Add</button>
+
+</div>
+
+</div>
+
+<div class="cart">
+
+<h2>Your Order</h2>
+
+<div id="cartItems"></div>
+
+<h3>Total ₹<span id="total">0</span></h3>
+
+<label>Select Table</label>
+
+<br>
+
+<select id="table">
+
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+<option>6</option>
+
+</select>
+
+<br><br>
+
+<button onclick="sendOrder()">Place Order</button>
+
+</div>
+
+</body>
+</html>
